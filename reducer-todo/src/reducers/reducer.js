@@ -12,8 +12,7 @@ export const todoReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TODO":
       return { ...state, itemList: action.payload };
-    default:
-      return state;
+
     case "TOGGLE_TODO":
       return {
         ...state,
@@ -23,5 +22,12 @@ export const todoReducer = (state, action) => {
             : item;
         }),
       };
+    case "DELETE_COMPLETED":
+      return {
+        ...state,
+        itemList: action.payload,
+      };
+    default:
+      return state;
   }
 };

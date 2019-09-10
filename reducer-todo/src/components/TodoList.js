@@ -15,10 +15,6 @@ const TodoList = () => {
     setNewInput(event.target.value);
   };
 
-  const toggleItem = event => {
-    console.log(event);
-  };
-
   return (
     <div>
       {state.itemList.map(todo => (
@@ -56,7 +52,16 @@ const TodoList = () => {
         >
           Add Todo
         </button>
-        <button>Clear Completed</button>
+        <button
+          onClick={() => {
+            dispatch({
+              type: "DELETE_COMPLETED",
+              payload: state.itemList.filter(item => item.completed === false),
+            });
+          }}
+        >
+          Clear Completed
+        </button>
       </div>
     </div>
   );
