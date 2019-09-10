@@ -8,26 +8,56 @@ import { initialState, todoReducer } from "../reducers/reducer";
 
 const TodoList = () => {
   //set state for data used in todo
-  const [newTodo, setNewTodo] = useState();
-  //set up reducer hook
+  const [input, setNewInput] = useState();
   const [state, dispatch] = useReducer(todoReducer, initialState);
-  console.log(state.item);
 
-  const handleChanges = e => {
-    setNewTodo(e.target.value);
+  const onChange = event => {
+    setNewInput(event.target.value);
   };
+
+  const toggleItem = event => {
+    console.log(event);
+  };
+
   return (
     <div>
-      <Todo item={state.item} />
-      <input
-        type="text"
-        name="newTodo"
-        value={newTodo}
-        placeholder="Add your task"
-        onChange={handleChanges}
-      />
-      <button onClick={() => dispatch({ type: "ADD_TODO" })}>Add Todo</button>
-      <button onClick="">Clear Completed</button>
+      {state.itemList.map(todo => (
+        <Todo
+          key={todo.id}
+          todo={todo}
+          onClick={id => {
+            dispatch({
+              type: "TOGGLE_TODO",
+              payload: id,
+            });
+          }}
+          style={
+            todo.completed === true ? { textDecoration: "line-through" } : null
+          }
+        />
+      ))}
+      <div className="todo-form">
+        <input
+          type="text"
+          name="item"
+          placeholder="Add your task"
+          onChange={onChange}
+        />
+        <button
+          onClick={() => {
+            dispatch({
+              type: "ADD_TODO",
+              payload: [
+                ...state.itemList,
+                { item: input, completed: false, id: new Date() },
+              ],
+            });
+          }}
+        >
+          Add Todo
+        </button>
+        <button>Clear Completed</button>
+      </div>
     </div>
   );
 };
