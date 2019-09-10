@@ -39,29 +39,34 @@ const TodoList = () => {
           placeholder="Add your task"
           onChange={onChange}
         />
-        <button
-          onClick={() => {
-            dispatch({
-              type: "ADD_TODO",
-              payload: [
-                ...state.itemList,
-                { item: input, completed: false, id: new Date() },
-              ],
-            });
-          }}
-        >
-          Add Todo
-        </button>
-        <button
-          onClick={() => {
-            dispatch({
-              type: "DELETE_COMPLETED",
-              payload: state.itemList.filter(item => item.completed === false),
-            });
-          }}
-        >
-          Clear Completed
-        </button>
+        <div className="btn">
+          <button
+            onClick={() => {
+              dispatch({
+                type: "ADD_TODO",
+                payload: [
+                  ...state.itemList,
+                  { item: input, completed: false, id: new Date() },
+                ],
+              });
+              setNewInput("");
+            }}
+          >
+            Add Todo
+          </button>
+          <button
+            onClick={() => {
+              dispatch({
+                type: "DELETE_COMPLETED",
+                payload: state.itemList.filter(
+                  item => item.completed === false,
+                ),
+              });
+            }}
+          >
+            Clear Completed
+          </button>
+        </div>
       </div>
     </div>
   );
