@@ -1,0 +1,22 @@
+.App {
+  text-align: center;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: lightskyblue;
+  margin: 10px;
+  border-radius: 20px;
+}
+
+input {
+  font-size: 18px;
+  border: 2px solid turquoise;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: black;
+  color: lightskyblue;
+}
